@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="jQuery.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        console.log("Request Token");
+
+        var requestModel = JSON.stringify({ UserID: 'usuario01', AccessKey: '94be650011cf412ca906fc335f615cdc' });
+
+        console.log(requestModel);
+
+        //var url = 'https://www.gocig.com.br/'; //Prod
+        //var url = 'http://18.228.151.203:8787/'; //Homologacao
+        //var url = 'http://localhost:56435/'; //Dev
+
+        $.ajax({
+            type: 'POST',
+            contentType: "application/json",
+            async: false,
+            url: url + 'api/login',
+            data: requestModel,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+
+                var apiAccessToken = data.accessToken;
+
+                Login(apiAccessToken);
+            },
+            error: function (request, error) {
+                console.log(request);
+                console.log(error);
+                $("body").append("error 1 - Não foi possivel solicitar o Token");
+            }
+        });
+
+        function Login(apiAccessToken) {
+            console.log('Login');
+
+            $.ajax({
+                type: 'GET',
+                contentType: "application/json",
+                url: url + 'api/conversoralturas/PesMetros/100',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + apiAccessToken);
+                },
+                dataType: 'json',
+                success: function (data) {
+                    var message = data.message;
+
+                    console.log(message);
+                    $("body").append(message);
+                },
+                error: function (request, error) {
+                    console.log(request);
+                    console.log(error);
+                    $("body").append("error 2 - Erro Authorization JWT Bearer não funcionou");
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>

@@ -13,8 +13,9 @@ namespace APIAlturas.Controllers
         {
             return new
             {
-                AlturaPes = alturaPes,
-                AlturaMetros = Math.Round(alturaPes * 0.3048, 4)
+                Message = "Usuario Autenticado - Authorization JWT Bearer funcionando",
+                //AlturaPes = alturaPes,
+                //AlturaMetros = Math.Round(alturaPes * 0.3048, 4)
             };
         }
     }

@@ -1,11 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Compile Remove="wwwroot\jwt\**" />
+    <Content Remove="wwwroot\jwt\**" />
+    <EmbeddedResource Remove="wwwroot\jwt\**" />
+    <None Remove="wwwroot\jwt\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="jwt\index.html" />
+    <None Remove="jwt\jQuery.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="jwt\index.html">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="jwt\jQuery.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -15,6 +32,10 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

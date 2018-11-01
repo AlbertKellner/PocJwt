@@ -74,6 +74,12 @@ namespace APIAlturas
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder =>
+                builder.AllowAnyOrigin()
+                       .AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .AllowCredentials());
+
             app.UseMvc();
         }
     }
